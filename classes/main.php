@@ -2,7 +2,6 @@
 // Скрипт реализации логики приложения
 
 // подключаем все классы
-require_once('Node.php');
 require_once('Graph.php');
 require_once('Dijkstra.php');
 require_once('Service.php');
