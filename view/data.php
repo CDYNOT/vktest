@@ -50,5 +50,5 @@
 		</div>
 	</div>
 	
-	<? require_once('result.php') ?>
+	<?php require_once('result.php') ?>
 </div>

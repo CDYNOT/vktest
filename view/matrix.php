@@ -1,17 +1,17 @@
 <?php
 // Шаблон отображения матрицы
 ?>
-<? if($matrix): ?>
+<?php if($matrix): ?>
 	<div class="matrix flex <?= $fullWidth ?>">
 		<div class="message_wrap">
 			<div class="message">Отметьте начальную и конечную точки. <br>Веса ячеек можно изменять динамически.</div>
 		</div>
 	
 		<div class="lines flex">
-			<? foreach($matrix as $i => $a): ?>
+			<?php foreach($matrix as $i => $a): ?>
 				<div class="line flex">
-					<? foreach($a as $j => $weight): ?>
-						<?
+					<?php foreach($a as $j => $weight): ?>
+						<?php
 							$checked = '';
 							$begin = '';
 							$end = '';
@@ -41,9 +41,9 @@
 						<label for="matrix_point_<?= $i ?>_<?= $j ?>" class="<?= $class ?>" data-value="<?= ($i.'_'.$j) ?>">
 							<input type="text" name="matrix[<?= $i ?>][<?= $j ?>]" value="<?= $weight ?>">
 						</label>
-					<? endforeach ?>
+					<?php endforeach ?>
 				</div>
-			<? endforeach ?>
+			<?php endforeach ?>
 		</div>
 	</div>
-<? endif ?>
+<?php endif ?>

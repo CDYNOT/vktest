@@ -26,8 +26,8 @@ require_once('classes/main.php');
 						<div class="block_title">Задача поиска кратчайшего пути в лабиринте</div>
 						
 						<div class="box flex">
-							<? require_once('view/data.php') ?>
-							<? require_once('view/matrix.php') ?>
+							<?php require_once('view/data.php') ?>
+							<?php require_once('view/matrix.php') ?>
 						</div>
 					</form>
 				</div>

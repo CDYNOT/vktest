@@ -11,13 +11,21 @@ class Dijkstra
 	private $esum = [];
 	private $path = [];
 
-	public function __construct(Graph $graph)
+    /**
+     * @param Graph $graph
+     */
+    public function __construct(Graph $graph)
 	{
 		$this->graph = $graph;
 	}
-	
-	// получаем короткий путь с дополнительной информацией
-	public function getResult(string $frNode, string $toNode): array
+
+    /**
+     * Получаем короткий путь с дополнительной информацией
+     * @param string $frNode
+     * @param string $toNode
+     * @return array
+     */
+    public function getResult(string $frNode, string $toNode): array
 	{
 		$this->init();
 		$this->esum[$frNode] = 0;
@@ -29,9 +37,12 @@ class Dijkstra
 		
 		return $this->getResultInfo($frNode, $toNode);
 	}
-	
-	// обнуляем веса, ребра, пути
-	private function init(): void
+
+    /**
+     * Обнуляем веса, ребра, пути
+     * @return void
+     */
+    private function init(): void
 	{
 		foreach($this->graph->getNodes() as $node)
 		{
@@ -40,9 +51,12 @@ class Dijkstra
 			$this->path[$node] = '';
 		}
 	}
-	
-	// поиск минимального значения
-	private function findNearestUnusedNode(): string
+
+    /**
+     * Поиск минимального значения
+     * @return string
+     */
+    private function findNearestUnusedNode(): string
 	{
 		$nearestNode = '';
 		foreach($this->graph->getNodes() as $node)
@@ -57,9 +71,13 @@ class Dijkstra
 		}
 		return $nearestNode;
 	}
-	
-	// обновляем esum (если меньше предыдущего значения) и собираем путь
-	private function setEsumToNextNodes(string $currNode): void
+
+    /**
+     * Обновляем esum (если меньше предыдущего значения) и собираем путь
+     * @param string $currNode
+     * @return void
+     */
+    private function setEsumToNextNodes(string $currNode): void
 	{
 		$this->used[$currNode] = true;
 		foreach($this->graph->getEdges($currNode) as $nextNode => $weight)
@@ -75,9 +93,14 @@ class Dijkstra
 			}
 		}
 	}
-	
-	// итоговая функция, возвращающая найденный путь или сообщение об ошибке
-	public function getResultInfo(string $frNode, string $toNode): array
+
+    /**
+     * Итоговая функция, возвращающая найденный путь или сообщение об ошибке
+     * @param string $frNode
+     * @param string $toNode
+     * @return array
+     */
+    public function getResultInfo(string $frNode, string $toNode): array
 	{
 		// если найден путь
 		if(isset($this->esum[$toNode]) && $this->esum[$toNode] !== INF && isset($this->path[$toNode])) {

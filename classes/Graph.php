@@ -6,23 +6,33 @@
  */
 class Graph
 {
-	/** @var array */
-	private $edges; 
-	
-	public function __construct(array $fromArray = [])
+	private $edges;
+
+    /**
+     * @param array $fromArray
+     */
+    public function __construct(array $fromArray = [])
 	{
 		$this->edges = [];
 		$this->initToArray($fromArray);
 	}
-	
-	// инициализирует граф из переданного массива
-	public function initFromArray(array $fromArray = []): void
+
+    /**
+     * Инициализирует граф из переданного массива
+     * @param array $fromArray
+     * @return void
+     */
+    public function initFromArray(array $fromArray = []): void
 	{
 		$this->initToArray($fromArray);
 	}
-	
-	// заполнение вершин и ребер из двумерного массива
-	public function initToArray(array $array) 
+
+    /**
+     * Заполнение вершин и ребер из двумерного массива
+     * @param array $array
+     * @return void
+     */
+    public function initToArray(array $array)
 	{
 		foreach($array as $i => $a)
 		{
@@ -79,49 +89,74 @@ class Graph
 			}
 		}
 	}
-	
-	// добавляет ноду
-	public function addNode(string $node): void
+
+    /**
+     * Добавляет ноду
+     * @param string $node
+     * @return void
+     */
+    public function addNode(string $node): void
 	{
 		$this->edges[$node] = [];
 	}
-	
-	// добавляем ребро
-	public function addEdge(string $node1, string $node2, string $weight): void
+
+    /**
+     * Добавляем ребро
+     * @param string $node1
+     * @param string $node2
+     * @param string $weight
+     * @return void
+     */
+    public function addEdge(string $node1, string $node2, string $weight): void
 	{
 		$this->edges[$node1][$node2] = $weight;
 	}
-	
-	// возвращает список нодов
-	public function getNodes(): iterable
+
+    /**
+     * Возвращает список нодов
+     * @return iterable
+     */
+    public function getNodes(): iterable
 	{
 		foreach($this->edges as $node => $edge) 
 		{
 			yield $node;
 		}
 	}
-	
-	// возвращает список нодов массивом
-	public function getNodesList(): array
+
+    /**
+     * Возвращает список нодов массивом
+     * @return array
+     */
+    public function getNodesList(): array
 	{
 		return $this->edges;
 	}
-	
-	// возвращает ребра
-	public function getEdges(string $node1): iterable
+
+    /**
+     * Возвращает ребра
+     * @param string $node1
+     * @return iterable
+     */
+    public function getEdges(string $node1): iterable
 	{
 		foreach($this->edges[$node1] as $node2 => $weight) 
 		{
 			yield $node2 => $weight;
 		}
 	}
-	
-	// декодировать координаты вершины
-	public function decodeNodeCoordinats(string $node): array
+
+    /**
+     * Декодировать координаты вершины
+     * @param string $node
+     * @return array
+     */
+    public function decodeNodeCoordinats(string $node): array
 	{
 		if($this->edges[$node])
 		{
 			return explode('_', $node);
 		}
-	}
+        return [];
+    }
 }

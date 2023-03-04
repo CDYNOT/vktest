@@ -6,20 +6,33 @@
  */
 class Service
 {
-	// кодируем координаты одной точки с раздилителем _
-	public static function encodeCoordinats(array $array): string
+    /**
+     * Кодируем координаты одной точки с раздилителем "_"
+     * @param array $array
+     * @return string
+     */
+    public static function encodeCoordinats(array $array): string
 	{
 		return implode('_', $array);
 	}
-	
-	// декодируем координаты одной точки с раздилителем _
-	public static function decodeCoordinats(string $str): array
+
+    /**
+     * Декодируем координаты одной точки с раздилителем "_"
+     * @param string $str
+     * @return array
+     */
+    public static function decodeCoordinats(string $str): array
 	{
 		return explode('_', $str);
 	}
-	
-	// проверяем присутствуют ли координаты точки $search в $array
-	public static function inArray(array $array, array $search): bool
+
+    /**
+     * Проверяем присутствуют ли координаты точки $search в $array
+     * @param array $array
+     * @param array $search
+     * @return bool
+     */
+    public static function inArray(array $array, array $search): bool
 	{
 		foreach($array as $item)
 		{
@@ -32,9 +45,14 @@ class Service
 		}
 		return false;
 	}
-	
-	// функция генерации матрицы
-	public static function genMatrix(int $n = 10, int $m = 10): array
+
+    /**
+     * Функция генерации матрицы
+     * @param int $n
+     * @param int $m
+     * @return array
+     */
+    public static function genMatrix(int $n = 10, int $m = 10): array
 	{
 		$n = (int)$n;
 		$m = (int)$m;
@@ -63,9 +81,13 @@ class Service
 		
 		return $matrix;
 	}
-	
-	// функция получения POST значений
-	public static function getRequest($key)
+
+    /**
+     * Функция получения POST значений
+     * @param $key
+     * @return false|mixed|null
+     */
+    public static function getRequest($key)
 	{
 		if (!is_array($_REQUEST))
 		{
@@ -84,9 +106,12 @@ class Service
 
 		return null;
 	}
-	
-	// получает json и проверяет его на корректность
-	public static function getJson(): array
+
+    /**
+     * Получает json и проверяет его на корректность
+     * @return array
+     */
+    public static function getJson(): array
 	{
 		$json = self::getRequest('json');
 		$decode = json_decode($json, true);
@@ -99,9 +124,12 @@ class Service
 		}
 		return [];
 	}
-	
-	// получаем матрицу
-	public static function getMatrix(): array
+
+    /**
+     * Получаем матрицу
+     * @return array
+     */
+    public static function getMatrix(): array
 	{
 		$matrix = self::getRequest('matrix');
 		$size = self::getSize();
@@ -133,9 +161,12 @@ class Service
 		
 		return $matrix;
 	}
-	
-	// координаты начальной и конечной точки
-	public static function getCoordinates(): ?array
+
+    /**
+     * Координаты начальной и конечной точки
+     * @return array|null
+     */
+    public static function getCoordinates(): ?array
 	{
 		$begin = self::getRequest('begin') ?: '';
 		$end = self::getRequest('end') ?: '';
@@ -144,9 +175,12 @@ class Service
 			'end' => $end
 		];
 	}
-	
-	// возвращаем размеры
-	public static function getSize(): ?array
+
+    /**
+     * Возвращаем размеры
+     * @return array|int[]|null
+     */
+    public static function getSize(): ?array
 	{
 		$size = self::getRequest('size') ?: [];
 		if(!self::checkSize($size))
@@ -155,15 +189,22 @@ class Service
 		}
 		return $size;
 	}
-	
-	// режим генерации
-	public static function generate(): int
+
+    /**
+     * Режим генерации
+     * @return int
+     */
+    public static function generate(): int
 	{
 		return (int) self::getRequest('generate');
 	}
-	
-	// проверка переданных размеров
-	public static function checkSize(array $size = []): bool
+
+    /**
+     * Проверка переданных размеров
+     * @param array $size
+     * @return bool
+     */
+    public static function checkSize(array $size = []): bool
 	{
 		if(!isset($size[0]) && !isset($size[1]))
 		{
@@ -181,10 +222,13 @@ class Service
 			
 		return true;
 	}
-	
-	
-	// функция проверки матрицы на корректность
-	public static function checkMatrix(array $matrix = []): bool
+
+    /**
+     * Функция проверки матрицы на корректность
+     * @param array $matrix
+     * @return bool
+     */
+    public static function checkMatrix(array $matrix = []): bool
 	{
 		$n = 0;
 		$m = 0;
@@ -217,15 +261,21 @@ class Service
 		
 		return true;
 	}
-	
-	// тестовая матрица json в формате
-	public static function genTestMatrixJson(): string
+
+    /**
+     * Тестовая матрица json в формате
+     * @return string
+     */
+    public static function genTestMatrixJson(): string
 	{
 		return json_encode(self::genTestMatrix());
 	}
 
-	// генерация тестовой матрицы
-	public static function genTestMatrix(): array
+    /**
+     * Генерация тестовой матрицы
+     * @return array[]
+     */
+    public static function genTestMatrix(): array
 	{
 		return Array
 		(
@@ -369,6 +419,5 @@ class Service
 				9 => 2,
 			)
 		);
-	}	
-		
+	}
 }
