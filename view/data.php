@@ -45,7 +45,7 @@
 		</div>
 		
 		<div class="submit flex">
-			<button type="reset" class="reset_btn" onclick="document.location.href = '/'">Сбросить</button>
+			<button type="reset" class="reset_btn" onclick="document.location.href = '?'">Сбросить</button>
 			<button type="submit" class="submit_btn">Сгенерировать</button>
 		</div>
 	</div>
